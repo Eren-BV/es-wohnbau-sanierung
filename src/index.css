@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Markenfarben aus dem bisherigen Auftritt (Logo-Rot #c41215, Anthrazit #2d2e33) */
+@theme {
+  --color-marke: #c41215;
+  --color-marke-dunkel: #9e0e11;
+  --color-anthrazit: #2d2e33;
+  --color-stein: #f5f4f2;
+  --color-linie: #e5e5e7;
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Raleway", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* In der base-Ebene, damit Utility-Klassen (z. B. text-white) Vorrang haben */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans text-anthrazit antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-anthrazit;
+    text-wrap: balance;
+  }
+}
+
+/* Fließtexte aus dem alten CMS behalten ihre Struktur (Absätze, Listen, Fettungen) */
+.fliesstext p + p,
+.fliesstext ul + p {
+  @apply mt-4;
+}
+.fliesstext ul {
+  @apply mt-3 space-y-1.5 pl-1;
+}
+.fliesstext li {
+  @apply relative pl-6;
+}
+.fliesstext li::before {
+  content: "";
+  @apply absolute top-[0.6em] left-0 h-1.5 w-3 bg-marke;
+}
+.fliesstext strong {
+  @apply font-semibold text-anthrazit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @layer base {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
